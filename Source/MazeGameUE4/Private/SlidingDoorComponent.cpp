@@ -56,8 +56,8 @@ void USlidingDoorComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 				CurrentTranslationTime += DeltaTime;
 				const float TimeRatio = FMath::Clamp(CurrentTranslationTime / TimeToTranslate, 0.0f, 1.0f);
 				const float TranslationAlpha = OpenCurve.GetRichCurveConst()->Eval(TimeRatio);
-				const FVector CurrentRotation = FMath::Lerp(StartPosition, FinalPosition, TranslationAlpha);
-				GetOwner()->SetActorLocation(CurrentRotation);
+				const FVector CurrentTranslation = FMath::Lerp(StartPosition, FinalPosition, TranslationAlpha);
+				GetOwner()->SetActorLocation(CurrentTranslation);
 			}
 
 			// if player is not close to the door
@@ -66,8 +66,8 @@ void USlidingDoorComponent::TickComponent(float DeltaTime, ELevelTick TickType, 
 				CurrentTranslationTime -= DeltaTime;
 				const float TimeRatio = FMath::Clamp(CurrentTranslationTime / TimeToTranslate, 0.0f, 1.0f);
 				const float TranslationAlpha = OpenCurve.GetRichCurveConst()->Eval(TimeRatio);
-				const FVector CurrentRotation = FMath::Lerp(StartPosition, FinalPosition, TranslationAlpha);
-				GetOwner()->SetActorLocation(CurrentRotation);
+				const FVector CurrentTranslation = FMath::Lerp(StartPosition, FinalPosition, TranslationAlpha);
+				GetOwner()->SetActorLocation(CurrentTranslation);
 			}
 		}
 	}
