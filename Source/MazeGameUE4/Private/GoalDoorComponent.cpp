@@ -17,15 +17,25 @@ UGoalDoorComponent::UGoalDoorComponent()
 	// ...
 }
 
+bool UGoalDoorComponent::IsOverlapping()
+{
+	APawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (PlayerPawn)
+	{
+		return TriggerBox->IsOverlappingActor(PlayerPawn);
+	}
+	return false;
+}
 
 // Called when the game starts
 void UGoalDoorComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	StartRotation = GetOwner()->GetActorRotation();
+	/*StartRotation = GetOwner()->GetActorRotation();
 	FinalRotation = GetOwner()->GetActorRotation() + DesiredRotation;
 
 	CurrentRotationTime = 0.0f;
+	*/
 }
 
 
@@ -33,7 +43,14 @@ void UGoalDoorComponent::BeginPlay()
 void UGoalDoorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	if (IsOverlapping())
+	{
+		FGenericPlatformMisc::RequestExit(false);
+	}
+	
 
+	/*
+	
 	if (CurrentRotationTime >= TimeToRotate)
 	{
 		CurrentRotationTime = TimeToRotate - DeltaTime;
@@ -69,6 +86,6 @@ void UGoalDoorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 				GetOwner()->SetActorRotation(CurrentRotation);
 			}
 		}
-	}
+	}*/
 }
 

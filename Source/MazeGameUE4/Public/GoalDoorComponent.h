@@ -18,6 +18,8 @@ public:
 	// Sets default values for this component's properties
 	UGoalDoorComponent();
 
+	bool IsOverlapping();
+
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -25,6 +27,7 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	/*
 	UPROPERTY(EditAnywhere)
 	FRotator DesiredRotation = FRotator::ZeroRotator;
 
@@ -35,7 +38,7 @@ protected:
 	float TimeToRotate = 1.0f;
 
 	float CurrentRotationTime = 0.0f;
-
+	*/
 	UPROPERTY(EditAnywhere)
 	ATriggerBox* TriggerBox;
 
