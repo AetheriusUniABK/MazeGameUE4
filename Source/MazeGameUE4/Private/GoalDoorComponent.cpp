@@ -31,11 +31,11 @@ bool UGoalDoorComponent::IsOverlapping()
 void UGoalDoorComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	/*StartRotation = GetOwner()->GetActorRotation();
+	StartRotation = GetOwner()->GetActorRotation();
 	FinalRotation = GetOwner()->GetActorRotation() + DesiredRotation;
 
 	CurrentRotationTime = 0.0f;
-	*/
+	
 }
 
 
@@ -43,13 +43,10 @@ void UGoalDoorComponent::BeginPlay()
 void UGoalDoorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	if (IsOverlapping())
-	{
-		FGenericPlatformMisc::RequestExit(false);
-	}
+	
 	
 
-	/*
+	
 	
 	if (CurrentRotationTime >= TimeToRotate)
 	{
@@ -65,9 +62,9 @@ void UGoalDoorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 		// if approaching front of door
 		if (TriggerBox && GetWorld()->GetFirstPlayerController())
 		{
-			APawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+			//APawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
 			// if player is in front of door
-			if (PlayerPawn && TriggerBox->IsOverlappingActor(PlayerPawn))
+			if (IsOverlapping())
 			{
 				CurrentRotationTime += DeltaTime;
 				const float TimeRatio = FMath::Clamp(CurrentRotationTime / TimeToRotate, 0.0f, 1.0f);
@@ -85,7 +82,12 @@ void UGoalDoorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAc
 				const FRotator CurrentRotation = FMath::Lerp(StartRotation, FinalRotation, RotationAlpha);
 				GetOwner()->SetActorRotation(CurrentRotation);
 			}
+
+			if (IsOverlapping() && CurrentRotationTime >= TimeToRotate)
+			{
+				FGenericPlatformMisc::RequestExit(false);
+			}
 		}
-	}*/
+	}
 }
 

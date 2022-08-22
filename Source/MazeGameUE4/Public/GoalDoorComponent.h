@@ -27,7 +27,7 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	/*
+	
 	UPROPERTY(EditAnywhere)
 	FRotator DesiredRotation = FRotator::ZeroRotator;
 
@@ -38,7 +38,7 @@ protected:
 	float TimeToRotate = 1.0f;
 
 	float CurrentRotationTime = 0.0f;
-	*/
+	
 	UPROPERTY(EditAnywhere)
 	ATriggerBox* TriggerBox;
 
